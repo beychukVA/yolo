@@ -1,0 +1,656 @@
+{
+  "id": "DOGE_USD_70",
+  "address": "0xA7aA0A6c6FF7B8d1999125D671e9D059A03DE4FC",
+  "humanAbi": [],
+  "abi": [
+    {
+      "inputs": [
+        { "internalType": "address", "name": "gameAdmin_", "type": "address" },
+        {
+          "internalType": "address",
+          "name": "registryContractAddress_",
+          "type": "address"
+        },
+        { "internalType": "bytes32", "name": "gamePair_", "type": "bytes32" },
+        { "internalType": "uint256", "name": "gameLength_", "type": "uint256" },
+        { "internalType": "uint256", "name": "roundIndex_", "type": "uint256" },
+        {
+          "internalType": "uint256",
+          "name": "maxStartDelay_",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "contractIdentifier",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "contractAddress",
+          "type": "address"
+        }
+      ],
+      "name": "AddressSet",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "roundIndex",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "bidder",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint96",
+          "name": "amount",
+          "type": "uint96"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "isUp",
+          "type": "bool"
+        }
+      ],
+      "name": "BidMade",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newFee",
+          "type": "uint256"
+        }
+      ],
+      "name": "FeeUpdate",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "bidRound",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "provider",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "lpContractAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint128",
+          "name": "upAmount",
+          "type": "uint128"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint128",
+          "name": "downAmount",
+          "type": "uint128"
+        }
+      ],
+      "name": "LiquidityProvision",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "Paused",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "previousAdminRole",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "newAdminRole",
+          "type": "bytes32"
+        }
+      ],
+      "name": "RoleAdminChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleGranted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleRevoked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "roundIndex",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint112",
+              "name": "startTime",
+              "type": "uint112"
+            },
+            { "internalType": "uint16", "name": "lpFeeRate", "type": "uint16" },
+            {
+              "internalType": "uint128",
+              "name": "strikePrice",
+              "type": "uint128"
+            },
+            { "internalType": "uint128", "name": "fees", "type": "uint128" },
+            {
+              "internalType": "uint128",
+              "name": "settlementPrice",
+              "type": "uint128"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct RoundData",
+          "name": "finalGameInfo",
+          "type": "tuple"
+        }
+      ],
+      "name": "RoundSettled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "roundIndex",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint112",
+          "name": "startTime",
+          "type": "uint112"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint16",
+          "name": "feeRate",
+          "type": "uint16"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint128",
+          "name": "strikePrice",
+          "type": "uint128"
+        }
+      ],
+      "name": "RoundStarted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "Unpaused",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "winningRounds",
+          "type": "uint256[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "winningAmounts",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "UserClaims",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "DEFAULT_ADMIN_ROLE",
+      "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "GAME_ID",
+      "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "acquireMarketLimit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "name": "allBids",
+      "outputs": [
+        { "internalType": "uint96", "name": "amount", "type": "uint96" },
+        { "internalType": "bool", "name": "isUp", "type": "bool" },
+        { "internalType": "uint72", "name": "bidRound", "type": "uint72" },
+        { "internalType": "uint72", "name": "next", "type": "uint72" }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "uint96", "name": "amount", "type": "uint96" },
+        { "internalType": "bool", "name": "isUp", "type": "bool" },
+        { "internalType": "uint72", "name": "bidRound", "type": "uint72" }
+      ],
+      "name": "bidInYolo",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "name": "bidsManager",
+      "outputs": [
+        { "internalType": "uint72", "name": "headIdx", "type": "uint72" },
+        {
+          "internalType": "uint128",
+          "name": "unsettledBidCount",
+          "type": "uint128"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "address", "name": "user", "type": "address" }
+      ],
+      "name": "calculateExpectedReturns",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "roundsClaimed",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "roundPayoutAmounts",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "claimReturns",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "name": "gamePools",
+      "outputs": [
+        { "internalType": "uint32", "name": "upCount", "type": "uint32" },
+        { "internalType": "uint32", "name": "downCount", "type": "uint32" },
+        { "internalType": "uint96", "name": "totalUserUp", "type": "uint96" },
+        { "internalType": "uint96", "name": "totalUserDown", "type": "uint96" },
+        { "internalType": "uint128", "name": "upLiquidity", "type": "uint128" },
+        {
+          "internalType": "uint128",
+          "name": "downLiquidity",
+          "type": "uint128"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "bytes32", "name": "role", "type": "bytes32" }
+      ],
+      "name": "getRoleAdmin",
+      "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "bytes32", "name": "role", "type": "bytes32" },
+        { "internalType": "uint256", "name": "index", "type": "uint256" }
+      ],
+      "name": "getRoleMember",
+      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "bytes32", "name": "role", "type": "bytes32" }
+      ],
+      "name": "getRoleMemberCount",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "address", "name": "user", "type": "address" }
+      ],
+      "name": "getUnclaimedRoundsLength",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "unclaimedRoundsLength",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "bytes32", "name": "role", "type": "bytes32" },
+        { "internalType": "address", "name": "account", "type": "address" }
+      ],
+      "name": "grantRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "bytes32", "name": "role", "type": "bytes32" },
+        { "internalType": "address", "name": "account", "type": "address" }
+      ],
+      "name": "hasRole",
+      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "lpAddress",
+      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "lpFeeRate",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "uint256", "name": "bidRound", "type": "uint256" },
+        {
+          "internalType": "uint128[2]",
+          "name": "amounts",
+          "type": "uint128[2]"
+        }
+      ],
+      "name": "makeMarketBid",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "marketLimit",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pause",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "paused",
+      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "uint112", "name": "startTime", "type": "uint112" },
+        {
+          "internalType": "uint128",
+          "name": "settlementPrice",
+          "type": "uint128"
+        },
+        {
+          "internalType": "uint128",
+          "name": "nextStrikePrice",
+          "type": "uint128"
+        }
+      ],
+      "name": "processRound",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "bytes32", "name": "role", "type": "bytes32" },
+        { "internalType": "address", "name": "account", "type": "address" }
+      ],
+      "name": "renounceRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "bytes32", "name": "role", "type": "bytes32" },
+        { "internalType": "address", "name": "account", "type": "address" }
+      ],
+      "name": "revokeRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "name": "roundDatas",
+      "outputs": [
+        { "internalType": "uint112", "name": "startTime", "type": "uint112" },
+        { "internalType": "uint16", "name": "lpFeeRate", "type": "uint16" },
+        { "internalType": "uint128", "name": "strikePrice", "type": "uint128" },
+        { "internalType": "uint128", "name": "fees", "type": "uint128" },
+        {
+          "internalType": "uint128",
+          "name": "settlementPrice",
+          "type": "uint128"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "roundIndex",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "stablecoinTokenContract",
+      "outputs": [
+        { "internalType": "contract IERC20", "name": "", "type": "address" }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }
+      ],
+      "name": "supportsInterface",
+      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "unpause",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "uint256", "name": "newFee", "type": "uint256" }
+      ],
+      "name": "updateLpFee",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "yoloRegistryContract",
+      "outputs": [
+        {
+          "internalType": "contract YoloRegistry",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "yoloWalletContract",
+      "outputs": [
+        { "internalType": "contract YoloWallet", "name": "", "type": "address" }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}

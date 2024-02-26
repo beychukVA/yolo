@@ -1,0 +1,13 @@
+{
+  "presets": ["react-app", "jotai/babel/preset"],
+  "plugins": [
+    [
+      "babel-plugin-styled-components",
+      {
+        "ssr": false
+      }
+    ],
+    "jotai/babel/plugin-debug-label",
+    "jotai/babel/plugin-react-refresh"
+  ]
+}

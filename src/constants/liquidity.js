@@ -1,0 +1,1 @@
+export const MIN_POOL_BALANCE = 400 * 1000000
